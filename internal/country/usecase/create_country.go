@@ -1,8 +1,8 @@
 package country
 
 import (
-	"github.com/andreluizmicro/go-soccer/internal/shared/domain/entity"
-	"github.com/andreluizmicro/go-soccer/internal/shared/domain/repository"
+	"github.com/andreluizmicro/go-soccer/internal/country/domain/entity"
+	"github.com/andreluizmicro/go-soccer/internal/country/domain/repository"
 )
 
 type CountryInputDTO struct {

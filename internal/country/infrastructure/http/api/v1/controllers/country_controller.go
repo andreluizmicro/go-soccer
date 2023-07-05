@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	usecase "github.com/andreluizmicro/go-soccer/internal/shared/usercase/country"
+	usecase "github.com/andreluizmicro/go-soccer/internal/country/usecase"
 
 	"github.com/gin-gonic/gin"
 )

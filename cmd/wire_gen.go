@@ -8,9 +8,9 @@ package main
 
 import (
 	"database/sql"
-	repository2 "github.com/andreluizmicro/go-soccer/internal/shared/domain/repository"
-	"github.com/andreluizmicro/go-soccer/internal/shared/infrastructure/repository"
-	"github.com/andreluizmicro/go-soccer/internal/shared/usercase/country"
+	repository2 "github.com/andreluizmicro/go-soccer/internal/country/domain/repository"
+	"github.com/andreluizmicro/go-soccer/internal/country/infrastructure/repository"
+	"github.com/andreluizmicro/go-soccer/internal/country/usecase"
 	"github.com/google/wire"
 )
 

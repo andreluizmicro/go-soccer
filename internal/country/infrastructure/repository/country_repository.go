@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/andreluizmicro/go-soccer/internal/shared/domain/entity"
+	"github.com/andreluizmicro/go-soccer/internal/country/domain/entity"
 )
 
 type CountryRepository struct {

@@ -1,9 +1,9 @@
-package v1
+package routes
 
 import (
 	"net/http"
 
-	"github.com/andreluizmicro/go-soccer/internal/manegment/infrastructure/http/api/v1/controllers"
+	"github.com/andreluizmicro/go-soccer/internal/country/infrastructure/http/api/v1/controllers"
 	"github.com/gin-gonic/gin"
 )
 

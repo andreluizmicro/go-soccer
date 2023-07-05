@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/andreluizmicro/go-soccer/internal/shared/domain/entity"
+import "github.com/andreluizmicro/go-soccer/internal/country/domain/entity"
 
 type CountryRepositoryInterface interface {
 	Create(country *entity.Country) error

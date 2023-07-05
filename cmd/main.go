@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/andreluizmicro/go-soccer/configs"
-	v1 "github.com/andreluizmicro/go-soccer/internal/manegment/infrastructure/http/api/v1"
+	countryRoutesV1 "github.com/andreluizmicro/go-soccer/internal/country/infrastructure/http/api/v1/routes"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -19,7 +19,7 @@ func main() {
 	gin.SetMode(gin.DebugMode)
 	r := gin.Default()
 
-	v1.Routes(r)
+	countryRoutesV1.Routes(r)
 
 	if err := r.Run(":" + config.WebServerPort); err != nil {
 		log.Fatal(err)

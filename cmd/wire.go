@@ -5,21 +5,21 @@ package main
 
 import (
 	"database/sql"
-	SharedDomainRepositoryInterface "github.com/andreluizmicro/go-soccer/internal/shared/domain/repository"
-	SharedRepository "github.com/andreluizmicro/go-soccer/internal/shared/infrastructure/repository"
-	"github.com/andreluizmicro/go-soccer/internal/shared/usercase/country"
+	CountryRepositoryInterface "github.com/andreluizmicro/go-soccer/internal/country/domain/repository"
+	CountryRepository "github.com/andreluizmicro/go-soccer/internal/country/infrastructure/repository"
+	CountryUseCase "github.com/andreluizmicro/go-soccer/internal/country/usecase"
 	"github.com/google/wire"
 )
 
 var setCountryRepositoryDependency = wire.NewSet(
-	SharedRepository.NewCountryRepository,
-	wire.Bind(new(SharedDomainRepositoryInterface.CountryRepositoryInterface), new(*SharedRepository.CountryRepository)),
+	CountryRepository.NewCountryRepository,
+	wire.Bind(new(CountryRepositoryInterface.CountryRepositoryInterface), new(*CountryRepository.CountryRepository)),
 )
 
-func NewCreateCountryUseCase(db *sql.DB) *country.CreateCountryUseCase {
+func NewCreateCountryUseCase(db *sql.DB) *CountryUseCase.CreateCountryUseCase {
 	wire.Build(
 		setCountryRepositoryDependency,
-		country.NewCreateCountryUseCase,
+		CountryUseCase.NewCreateCountryUseCase,
 	)
-	return &country.CreateCountryUseCase{}
+	return &CountryUseCase.CreateCountryUseCase{}
 }

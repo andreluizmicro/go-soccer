@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/andreluizmicro/go-soccer/internal/shared/domain/entity"
+	"github.com/andreluizmicro/go-soccer/internal/user/domain/entity"
 	"gorm.io/gorm"
 )
 

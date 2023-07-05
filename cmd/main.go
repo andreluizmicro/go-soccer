@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"net/http"
 
 	"github.com/andreluizmicro/go-soccer/configs"
 	"github.com/andreluizmicro/go-soccer/database"
@@ -23,13 +22,7 @@ func main() {
 
 	database.ConnectDatabase()
 
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
-
-	v1.NewRoutes(r)
+	v1.Routes(r)
 
 	if err := r.Run(":" + config.WebServerPort); err != nil {
 		log.Fatal(err)

@@ -4,25 +4,43 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
+    container_name: go-soccer-api
     ports:
-      - "8081:8081"
+      - 9000:9000
     networks:
-      - broker-kafka
+      - go-soccer
     volumes:
       - .:/app
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: go_soccer
+      MYSQL_PASSWORD: root
+    volumes:
+      - .docker/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - go-soccer
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     networks:
-      - broker-kafka
+      - go-soccer
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 
   kafka:
     image: confluentinc/cp-kafka:latest
+    container_name: kafka
     networks:
-      - broker-kafka
+      - go-soccer
     depends_on:
       - zookeeper
     ports:
@@ -41,7 +59,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - broker-kafka
+      - go-soccer
     depends_on:
       - kafka
     environment:
@@ -50,5 +68,5 @@ services:
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
 
 networks:
-  broker-kafka:
+  go-soccer:
     driver: bridge

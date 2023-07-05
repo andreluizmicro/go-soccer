@@ -7,6 +7,9 @@ docker-build:
 docker-down: 
 	docker-compose down
 
+docker-bash:
+	docker-compose exec app bash
+
 go-test:
 	go test ./... 
 

@@ -5,6 +5,17 @@ import (
 	"github.com/andreluizmicro/go-soccer/pkg/entity"
 )
 
+type Props struct {
+	Name        string
+	Symbol      string
+	Country     country.Country
+	Coach       Coach
+	Players     []Player
+	Stadium     Stadium
+	FoundedYear uint
+	Titles      uint
+}
+
 type Team struct {
 	ID          entity.ID       `json:"id"`
 	Name        string          `json:"name"`
@@ -17,16 +28,16 @@ type Team struct {
 	Symbol      string          `json:"symbol"`
 }
 
-func NewTeam(name, symbol string, country country.Country, coach Coach, players []Player, stadium Stadium, foundedYear, titles uint) (*Team, error) {
+func NewTeam(props Props) (*Team, error) {
 	return &Team{
 		ID:          entity.NewID(),
-		Name:        name,
-		Country:     country,
-		Coach:       coach,
-		Players:     players,
-		Stadium:     stadium,
-		FoundedYear: foundedYear,
-		Titles:      titles,
-		Symbol:      symbol,
+		Name:        props.Name,
+		Country:     props.Country,
+		Coach:       props.Coach,
+		Players:     props.Players,
+		Stadium:     props.Stadium,
+		FoundedYear: props.FoundedYear,
+		Titles:      props.Titles,
+		Symbol:      props.Symbol,
 	}, nil
 }

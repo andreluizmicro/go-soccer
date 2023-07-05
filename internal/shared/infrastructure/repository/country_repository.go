@@ -1,40 +1,64 @@
 package repository
 
 import (
+	"database/sql"
+	"fmt"
+
 	"github.com/andreluizmicro/go-soccer/internal/shared/domain/entity"
-	"github.com/andreluizmicro/go-soccer/internal/shared/infrastructure/repository/model"
 )
 
 type CountryRepository struct {
-	model *model.CountryModel
+	DB *sql.DB
 }
 
-func NewCountryRepository(db *model.CountryModel) *CountryRepository {
+func NewCountryRepository(db *sql.DB) *CountryRepository {
 	return &CountryRepository{
-		model: db,
+		DB: db,
 	}
 }
 
 func (repository *CountryRepository) Create(country *entity.Country) error {
-	return repository.model.Create(country)
+	fmt.Println("TSTEEEEE")
+	return nil
 }
 
 func (repository *CountryRepository) FindAll(page, limit int, sort string) ([]entity.Country, error) {
-	return repository.model.FindAll(page, limit, sort)
+	var countries []entity.Country
+	return countries, nil
+	// var countries []entity.Country
+	// var err error
+	// if sort != "" && sort != "asc" && sort != "desc" {
+	// 	sort = "asc"
+	// }
+	// if page != 0 && limit != 0 {
+	// 	err = repository.DB.Limit(limit).Offset((page - 1) * limit).Order("created_at" + sort).Find(countries).Error
+	// } else {
+	// 	err = repository.DB.Order("created_at" + sort).Find(countries).Error
+	// }
+	// return countries, err
 }
 
 func (repository *CountryRepository) FindByID(id string) (*entity.Country, error) {
-	country, err := repository.model.FindByID(id)
-	if err != nil {
-		return nil, err
-	}
-	return country, nil
+	var country entity.Country
+	return &country, nil
+	// err := repository.DB.First(&country, "id = ?", id).Error
+	// return &country, err
 }
 
 func (repository *CountryRepository) Update(country *entity.Country) error {
-	return repository.model.Update(*country)
+	return nil
+	// _, err := repository.FindByID(country.ID.String())
+	// if err != nil {
+	// 	return err
+	// }
+	// return repository.DB.Save(country).Error
 }
 
 func (repository *CountryRepository) Delete(id string) error {
-	return repository.model.Delete(id)
+	return nil
+	// country, err := repository.FindByID(id)
+	// if err != nil {
+	// 	return err
+	// }
+	// return repository.DB.Delete(country).Error
 }

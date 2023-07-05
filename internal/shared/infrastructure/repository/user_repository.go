@@ -1,30 +1,28 @@
 package repository
 
 import (
-	"errors"
-
 	"github.com/andreluizmicro/go-soccer/internal/shared/domain/entity"
-	"github.com/andreluizmicro/go-soccer/internal/shared/infrastructure/repository/model"
+	"gorm.io/gorm"
 )
 
 type UserRepository struct {
-	model model.UserModel
+	DB *gorm.DB
 }
 
-func NewUserRepository(model *model.UserModel) *UserRepository {
+func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{
-		model: *model,
+		DB: db,
 	}
 }
 
 func (repository *UserRepository) Create(user *entity.User) error {
-	return repository.model.Create(user)
+	return repository.DB.Create(user).Error
 }
 
 func (repository *UserRepository) FindByEmail(email string) (*entity.User, error) {
-	user, err := repository.model.FindByEmail(email)
-	if err != nil {
-		return nil, errors.New("user not found")
+	var user entity.User
+	if err := repository.DB.Where("email = ?", email).First(&user).Error; err != nil {
+		return nil, err
 	}
-	return user, nil
+	return &user, nil
 }

@@ -40,7 +40,9 @@ func TestNewCoach(t *testing.T) {
 	country, err := country.NewCountry(params)
 	assert.Nil(t, err)
 
-	team, err := NewTeam("São Paulo Futebol Clube", "http://saopaulo.jpeg", *country, *coach, players, *stadium, 1919, 100)
+	props := Props{"São Paulo Futebol Clube", "http://saopaulo.jpeg", *country, *coach, players, *stadium, 1919, 100}
+
+	team, err := NewTeam(props)
 	assert.Nil(t, err)
 	assert.Equal(t, club, team.Name)
 }

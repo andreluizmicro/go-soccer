@@ -1,4 +1,4 @@
-package database
+package model
 
 import (
 	"database/sql"
@@ -26,5 +26,6 @@ func ConnectDatabase() {
 	if err != nil {
 		panic(err)
 	}
+	DB = db
 	defer db.Close()
 }

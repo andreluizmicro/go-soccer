@@ -3,10 +3,11 @@ package entity
 import "github.com/andreluizmicro/go-soccer/pkg/entity"
 
 type Params struct {
+	ID           string
 	Name         string
 	Capital      string
 	Area         string
-	Languages    string
+	Language     string
 	Timezone     string
 	Continent    string
 	OfficalColor string
@@ -18,7 +19,7 @@ type Country struct {
 	Name         string    `json:"name"`
 	Capital      string    `json:"capital"`
 	Area         string    `json:"area"`
-	Languages    string    `json:"languages"`
+	Language     string    `json:"language"`
 	Timezone     string    `json:"timezone"`
 	Continent    string    `json:"continent"`
 	OfficalColor string    `json:"officalcolor"`
@@ -32,9 +33,9 @@ func NewCountry(params Params) (*Country, error) {
 		Capital:      params.Capital,
 		Population:   params.Population,
 		Area:         params.Area,
-		Languages:    params.Languages,
+		Language:     params.Language,
 		Timezone:     params.Timezone,
 		Continent:    params.Continent,
-		OfficalColor: params.Continent,
+		OfficalColor: params.OfficalColor,
 	}, nil
 }

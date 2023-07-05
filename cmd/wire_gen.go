@@ -7,7 +7,6 @@
 package main
 
 import (
-	"database/sql"
 	repository2 "github.com/andreluizmicro/go-soccer/internal/country/domain/repository"
 	"github.com/andreluizmicro/go-soccer/internal/country/infrastructure/repository"
 	"github.com/andreluizmicro/go-soccer/internal/country/usecase"
@@ -20,9 +19,9 @@ import (
 
 // Injectors from wire.go:
 
-func NewCreateCountryUseCase(db *sql.DB) *country.CreateCountryUseCase {
-	countryRepository := repository.NewCountryRepository(db)
-	createCountryUseCase := country.NewCreateCountryUseCase(countryRepository)
+func NewCreateCountryUseCase() *usecase.CreateCountryUseCase {
+	countryRepository := repository.NewCountryRepository()
+	createCountryUseCase := usecase.NewCreateCountryUseCase(countryRepository)
 	return createCountryUseCase
 }
 

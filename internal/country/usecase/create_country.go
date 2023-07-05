@@ -1,4 +1,4 @@
-package country
+package usecase
 
 import (
 	"github.com/andreluizmicro/go-soccer/internal/country/domain/entity"
@@ -9,7 +9,7 @@ type CountryInputDTO struct {
 	Name         string `json:"name"`
 	Capital      string `json:"capital"`
 	Area         string `json:"area"`
-	Languages    string `json:"language"`
+	Language     string `json:"language"`
 	Timezone     string `json:"timezone"`
 	Continent    string `json:"continent"`
 	OfficalColor string `json:"offical_color"`
@@ -17,7 +17,15 @@ type CountryInputDTO struct {
 }
 
 type CountryOutputDTO struct {
-	Name string `json:"name"`
+	ID           string `json:"id"`
+	Name         string `json:"name"`
+	Capital      string `json:"capital"`
+	Area         string `json:"area"`
+	Language     string `json:"language"`
+	Timezone     string `json:"timezone"`
+	Continent    string `json:"continent"`
+	OfficalColor string `json:"offical_color"`
+	Population   int    `json:"population"`
 }
 
 type CreateCountryUseCase struct {
@@ -30,12 +38,12 @@ func NewCreateCountryUseCase(CountryRepository repository.CountryRepositoryInter
 	}
 }
 
-func (service *CreateCountryUseCase) Execute(input CountryInputDTO) (CountryOutputDTO, error) {
+func (usecase *CreateCountryUseCase) Execute(input CountryInputDTO) (CountryOutputDTO, error) {
 	params := entity.Params{
 		Name:         input.Name,
 		Capital:      input.Capital,
 		Area:         input.Area,
-		Languages:    input.Languages,
+		Language:     input.Language,
 		Timezone:     input.Timezone,
 		Continent:    input.Continent,
 		OfficalColor: input.OfficalColor,
@@ -43,12 +51,22 @@ func (service *CreateCountryUseCase) Execute(input CountryInputDTO) (CountryOutp
 	}
 
 	country, err := entity.NewCountry(params)
+	if err != nil {
+		return CountryOutputDTO{}, err
+	}
 
-	if err := service.CountryRepository.Create(country); err != nil {
+	if err := usecase.CountryRepository.Create(country); err != nil {
 		return CountryOutputDTO{}, err
 	}
 
 	return CountryOutputDTO{
-		Name: country.Name,
+		Name:         country.Name,
+		Capital:      input.Capital,
+		Area:         input.Area,
+		Language:     input.Language,
+		Timezone:     input.Timezone,
+		Continent:    input.Continent,
+		OfficalColor: input.OfficalColor,
+		Population:   input.Population,
 	}, err
 }
